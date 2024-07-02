@@ -1,0 +1,12 @@
+@import url(../components/Header/Header.module.css);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+html {
+  min-width: 320px;
+}
