@@ -1,0 +1,55 @@
+.aboutSection {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.content {
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.abParagraph {
+  font-size: 11px;
+  line-height: 15px;
+  padding: 0 5px;
+}
+
+.chef {
+  margin: 0 auto;
+  max-width: 380px;
+  min-height: 213px;
+  max-height: 254px;
+  position: relative;
+  background-image: url(../../../public/images/chef.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+@media screen and (min-width: 1400px) {
+  .shell {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: justify;
+  }
+
+  .abParagraph {
+    font-size: 14px;
+    line-height: 19px;
+    padding: 0;
+  }
+
+  .chef {
+    width: 100%;
+    max-width: 540px;
+    min-height: 301px;
+    max-height: 301px;
+  }
+
+  .aboutSection {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+}
