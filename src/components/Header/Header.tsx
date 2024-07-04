@@ -1,7 +1,6 @@
 import css from "./Header.module.css";
 import Link from "next/link";
 import defCss from "../../app/page.module.css";
-import Image from "next/image";
 
 export default function Header() {
   return (
