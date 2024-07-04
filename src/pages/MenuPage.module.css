@@ -1,3 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+}
+
 .MenuPageSection {
   padding: 25px 0;
   display: flex;

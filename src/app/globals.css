@@ -7,6 +7,7 @@
 html {
   max-width: 1400px;
   margin: 0 auto;
+  min-height: 100vh;
 }
 
 h1,
@@ -46,8 +47,27 @@ body {
 main {
   margin: 0;
   padding: 0;
+  flex: 1;
 }
 
 section {
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 25px 0;
+}
+
+footer {
+  text-align: center;
+  background-color: #ededed;
+  margin-top: auto;
+}
+
+@media screen and (min-width: 1100px) {
+  section {
+    padding: 75px 0;
+  }
+
+  footer {
+    background-color: #f4f4fd;
+  }
 }

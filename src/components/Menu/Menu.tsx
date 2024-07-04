@@ -1,58 +1,65 @@
 import { Formik, Form, Field } from "formik";
 import css from "./Menu.module.css";
-import axios from "axios";
+import searchMeals from "@/api";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface Meal {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-  strInstructions: string;
+  id: number;
+  name: string;
+  description: string;
+  cooking: string;
+  imageUrl: string;
+}
+
+interface SearchError {
+  message: string;
 }
 
 export default function Menu() {
-  const apiEndpoint = "https://www.themealdb.com/api/json/v1/1";
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<SearchError | null>(null);
 
-  const fetchMeals = async (searchQuery: string) => {
-    const response = await axios.get(
-      `${apiEndpoint}/search.php?s=${searchQuery}`
-    );
-    const meals: Meal[] = response.data.meals;
-    return meals;
-  };
-
-  const { id } = useRouter().query;
-  const [meal, setMeal] = useState<Meal | null>(null);
-
-  useEffect(() => {
-    const fetchMeal = async () => {
-      try {
-        const response = await axios.get(`${apiEndpoint}/lookup.php?i=${id}`);
-        if (response.data.meals) {
-          const meal: Meal = response.data.meals[0];
-          setMeal(meal);
-        } else {
-          console.error("No meal found for ID", id);
-        }
-      } catch (error) {
-        console.error("Error fetching meal:", error);
+  const handleSearch = async () => {
+    setLoading(true);
+    try {
+      const meals = await searchMeals(searchQuery);
+      setMeals(meals.slice(0, 5));
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError({ message: error.message });
+      } else {
+        setError({ message: "An unknown error occurred" });
       }
-    };
-    fetchMeal();
-  }, [id]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
-      <Formik initialValues={{}} onSubmit={() => {}}>
+      <Formik
+        initialValues={{ search: "" }}
+        onSubmit={(values, { setSubmitting }) => {
+          handleSearch();
+          setSubmitting(false);
+        }}
+      >
         <Form className={css.form}>
           <div className={css.innerContainer}>
             <Field
               type="input"
               name="search"
               className={css.field}
-              onChange={fetchMeals}
+              value={searchQuery}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSearchQuery(e.target.value)
+              }
+              placeholder="Search for meals"
             />
             <button type="submit" className={css.submitBtn}>
               Search
@@ -60,15 +67,32 @@ export default function Menu() {
           </div>
         </Form>
       </Formik>
-      <div>
-        {meal && (
-          <div>
-            <h1>{meal.strMeal}</h1>
-            <img src={meal.strMealThumb} alt={meal.strMeal} />
-            <p>{meal.strInstructions}</p>
-          </div>
-        )}
-      </div>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul className={css.mealList}>
+          {meals.map((meal) => (
+            <li key={meal.id}>
+              <div className={css.imgContainer}>
+                <Image
+                  src={`/public/images/${meal.imageUrl}`}
+                  alt={meal.name}
+                  width={380}
+                  height={194}
+                  className={css.img}
+                />
+              </div>
+              <h2>{meal.name}</h2>
+              <p>{meal.description}</p>
+              <h3>Cooking instructions:</h3>
+              <p>{meal.cooking}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {error && <p className={css.error}>{error.message}</p>}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
 import About from "@/components/About/About";
 import StaticMeals from "@/components/StaticMeals/StaticMeals";
+import Footer from "@/components/Footer/Footer";
 
 export default function MainPage() {
   return (
@@ -31,6 +32,7 @@ export default function MainPage() {
           <Hero />
           <About />
           <StaticMeals />
+          <Footer />
         </div>
       </main>
     </>
