@@ -5,6 +5,22 @@
   width: 100%;
 }
 
+.formik {
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  width: 380px;
+  height: 194px;
+}
+
+.mealItem {
+  display: flex;
+  flex-direction: column;
+  max-width: 380px;
+}
+
 .innerContainer {
   display: flex;
   align-items: center;
@@ -55,5 +71,11 @@
   .img {
     width: 538px;
     height: 274px;
+  }
+
+  .mealItem {
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
   }
 }

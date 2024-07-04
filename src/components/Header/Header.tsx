@@ -14,9 +14,11 @@ export default function Header() {
           Menu
         </Link>
         <div className={css.logo}>
-          <h2 className={defCss.sectionTitle}>Selve Restourant</h2>
+          <a href="/" className={css.linkMobile}>
+            <h2 className={defCss.sectionTitle}>Selve Restourant</h2>
+          </a>
         </div>
-        <a href="#" className={css.link}>
+        <a href="#footer" className={css.link}>
           Contacts
         </a>
 

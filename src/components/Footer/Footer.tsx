@@ -3,7 +3,7 @@ import defCss from "@/app/page.module.css";
 
 export default function Footer() {
   return (
-    <footer className={css.pageFooter}>
+    <footer className={css.pageFooter} id="footer">
       <div className={css.hours}>
         <h2 className={defCss.sectionTitle}>Opening Hours</h2>
         <div>

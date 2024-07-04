@@ -12,11 +12,27 @@
 
 .logo {
   max-width: 200px;
+  cursor: pointer;
 }
 
 .link {
   font-size: 18px;
   display: none;
+  color: black;
+}
+
+.linkMobile {
+  color: black;
+}
+
+.linkMobile:hover {
+  transition: all 0.2s ease-in-out;
+  color: #fab834;
+}
+
+.link:hover {
+  transition: all 0.2s ease-in-out;
+  color: #fab834;
 }
 
 .logoText {
